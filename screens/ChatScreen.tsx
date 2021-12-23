@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducers";
 import { TextInput, Button, IconButton, Avatar } from "react-native-paper";
 import SimpleHeader from "../components/SimpleHeader";
+import Chat from "../components/Chat";
 import { addMessage, resetChat } from "../redux/actions";
 import * as helpers from "../helpers/helpers";
 import uuid from "react-native-uuid";
@@ -64,46 +65,7 @@ export default function ChatScreen() {
       <SimpleHeader title={`${name} to WALL-E`} backToClick={endChat} />
       <View style={styles.subContainer}>
         <View style={styles.chatContainer}>
-          <FlatList
-            style={styles.scrollList}
-            data={chat || []}
-            keyExtractor={(item) => item.id}
-            renderItem={({ item }) => (
-              <View
-                style={[
-                  styles.msgBox,
-                  item.sender !== "bot" ? styles.msgBoxUser : {},
-                ]}
-              >
-                {item.sender === "bot" && (
-                  <Avatar.Image
-                    size={45}
-                    style={{ backgroundColor: "#131B24" }}
-                    source={require("../assets/images/walle.png")}
-                  />
-                )}
-                <View
-                  style={item.sender === "bot" ? styles.msgBot : styles.msgUser}
-                  key={item.roomId}
-                >
-                  <Text
-                    style={
-                      item.sender === "bot"
-                        ? styles.msgBotText
-                        : styles.msgUserText
-                    }
-                  >
-                    {item.text}
-                  </Text>
-                </View>
-              </View>
-            )}
-            ListEmptyComponent={
-              <View>
-                <Text style={styles.noMsgText}>Ready, set, GO!</Text>
-              </View>
-            }
-          />
+          <Chat chat={chat} />
         </View>
         <View style={styles.msgContainer}>
           <TextInput
@@ -162,43 +124,8 @@ const styles = StyleSheet.create({
     borderColor: "#131B24",
     borderWidth: 0,
   },
-  noMsgText: {
-    color: "white",
-    fontSize: 18,
-    paddingVertical: 10,
-    width: "100%",
-    textAlign: "center",
-  },
   button: {
     width: "10%",
     marginLeft: 25,
   },
-  scrollList: {
-    height: "100%",
-    marginTop: 10,
-  },
-  msgBox: {
-    flexDirection: "row",
-    marginVertical: 5,
-    alignItems: "center",
-    marginHorizontal: 10,
-  },
-  msgBoxUser: {
-    justifyContent: "flex-end",
-  },
-  msgBot: {
-    backgroundColor: "lightgray",
-    borderRadius: 15,
-    padding: 10,
-    marginLeft: 10,
-  },
-  msgBotText: { color: "black" },
-  msgUser: {
-    backgroundColor: "#0399FF",
-    borderRadius: 15,
-    padding: 10,
-    marginLeft: 10,
-    alignSelf: "flex-end",
-  },
-  msgUserText: { color: "white" },
 });

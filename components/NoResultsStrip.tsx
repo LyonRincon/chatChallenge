@@ -10,13 +10,14 @@ export default function NoResultsStrip({
   legend,
   extraStyle,
 }: iNoResultsStrip) {
-  const styles = StyleSheet.create({
-    emptyText: {
-      marginTop: 10,
-      backgroundColor: "#B2B8BE",
-      padding: 10,
-      textAlign: "center",
-    },
-  });
   return <Text style={[styles.emptyText, extraStyle]}>{legend}</Text>;
 }
+
+const styles = StyleSheet.create({
+  emptyText: {
+    marginTop: 10,
+    backgroundColor: "#B2B8BE",
+    padding: 10,
+    textAlign: "center",
+  },
+});

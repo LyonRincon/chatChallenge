@@ -13,6 +13,11 @@ const Questions = [
   "What’s your favorite line from a movie or book?",
   "What’s your all-time favorite quotes?",
   "What skill do you wish you had?",
+  "What is your nickname?",
+  "What would your dream house look like?",
+  "What is one goal you have for the near future?",
+  "Do you think you could live in outer space for a year?",
+  "What item do you collect?",
 ];
 
 export { Questions };

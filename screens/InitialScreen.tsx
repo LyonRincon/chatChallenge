@@ -23,7 +23,7 @@ export default function InitialScreen() {
 
   return (
     <View style={styles.container}>
-      <SimpleHeader title="Ready to Chat!" useBg />
+      <SimpleHeader title="Welcome to BOT chat!" useBg />
       <View style={styles.subContainer}>
         <TextInput
           autoFocus
