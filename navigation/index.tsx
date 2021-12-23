@@ -6,8 +6,8 @@ import {
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName } from "react-native";
-import ToDoListScreen from "../screens/ToDoListScreen";
-import AddToListScreen from "../screens/AddToListScreen";
+import InitialScreen from "../screens/InitialScreen";
+import ChatScreen from "../screens/ChatScreen";
 import { RootStackParamList } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 
@@ -32,13 +32,13 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="List"
-        component={ToDoListScreen}
+        name="Initial"
+        component={InitialScreen}
         options={{ headerShown: false }}
       />
       <Stack.Screen
-        name="Add"
-        component={AddToListScreen}
+        name="Chat"
+        component={ChatScreen}
         options={{ headerShown: false }}
       />
     </Stack.Navigator>

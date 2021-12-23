@@ -4,21 +4,18 @@ import { useNavigation } from "@react-navigation/native";
 import { useDispatch } from "react-redux";
 import { HelperText, TextInput, Button } from "react-native-paper";
 import SimpleHeader from "../components/SimpleHeader";
-import { addItem } from "../redux/actions";
-import uuid from "react-native-uuid";
+import { setUser } from "../redux/actions";
 
-export default function AddToListScreen() {
+export default function InitialScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
   const [text, setText] = React.useState("");
   const [error, hasError] = React.useState(false);
 
-  const submitToDo = () => {
+  const submitMessage = () => {
     if (text?.trim().length > 0) {
-      dispatch(
-        addItem({ id: uuid.v4().toString(), label: text, completed: false })
-      );
-      navigation.navigate("List");
+      dispatch(setUser(text?.trim()));
+      navigation.navigate("Chat");
     } else {
       hasError(true);
     }
@@ -26,30 +23,30 @@ export default function AddToListScreen() {
 
   return (
     <View style={styles.container}>
-      <SimpleHeader
-        title="Add to list"
-        backToClick={() => navigation.navigate("List")}
-      />
+      <SimpleHeader title="Ready to Chat!" useBg />
       <View style={styles.subContainer}>
         <TextInput
           autoFocus
-          label="Todo"
+          label="Name"
           value={text}
           onChangeText={(text: string) => setText(text)}
           style={styles.input}
-          onSubmitEditing={submitToDo}
+          onSubmitEditing={submitMessage}
+          activeOutlineColor="#131B24"
+          activeUnderlineColor="#131B24"
+          blurOnSubmit={false}
         />
         <HelperText type="error" visible={error} style={styles.errorText}>
-          Please enter a valid ToDo
+          Please enter a valid name
         </HelperText>
         <Button
-          icon="plus"
+          icon="chat"
           mode="contained"
-          onPress={submitToDo}
+          onPress={submitMessage}
           color="#B2B8BE"
           style={styles.button}
         >
-          Add
+          Start chat
         </Button>
       </View>
     </View>
@@ -62,7 +59,7 @@ const styles = StyleSheet.create({
     height: "100%",
   },
   subContainer: {
-    paddingTop: 20,
+    paddingTop: 40,
     width: "90%",
     alignSelf: "center",
   },
@@ -71,8 +68,9 @@ const styles = StyleSheet.create({
   },
   errorText: {
     color: "#EB5656",
+    fontSize: 15,
   },
   button: {
-    marginTop: 20,
+    marginTop: 10,
   },
 });

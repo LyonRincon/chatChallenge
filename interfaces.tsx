@@ -1,12 +1,12 @@
-export interface iToDoList {
-  list: iToDoListItem[];
-  completed: boolean;
-  splittedView: boolean;
+export interface iMessageList {
+  chat: iMessageItem[];
 }
 
-export interface iToDoListItem {
+export interface iMessageItem {
   id: string;
-  label: string;
+  text: string;
+  sender: string;
+  time: string;
 }
 
 export interface iSimpleHeader {
@@ -16,4 +16,5 @@ export interface iSimpleHeader {
     iconName: string;
     onPress: () => void;
   };
+  useBg?: boolean;
 }

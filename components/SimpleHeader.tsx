@@ -7,10 +7,11 @@ export default function SimpleHeader({
   title,
   backToClick,
   rightComponent,
+  useBg = false,
 }: iSimpleHeader) {
   const styles = StyleSheet.create({
     header: {
-      backgroundColor: "#EB5656",
+      backgroundColor: useBg ? "#B2B200" : "#131B24",
     },
   });
   return (

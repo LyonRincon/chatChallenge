@@ -17,8 +17,8 @@ declare global {
 }
 
 export type RootStackParamList = {
-  List: undefined;
-  Add: undefined;
+  Initial: undefined;
+  Chat: undefined;
 };
 
 export type RootStackScreenProps<

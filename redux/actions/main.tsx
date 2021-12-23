@@ -1,23 +1,15 @@
-import { iToDoListItem } from "../../interfaces";
+import { iMessageItem } from "../../interfaces";
 
-export const addItem = (item: iToDoListItem) => ({
-  type: "ADD_ITEM",
-  payload: item,
+export const addMessage = (message: iMessageItem) => ({
+  type: "ADD_MESSAGE",
+  payload: message,
 });
 
-export const updateItem = (item: iToDoListItem, isCompleted: boolean) => ({
-  type: "UPDATE_ITEM",
-  payload: { item, isCompleted },
+export const resetChat = () => ({
+  type: "RESET_CHAT",
 });
 
-export const changeItemStatus = (
-  item: iToDoListItem,
-  isCompleted: boolean
-) => ({
-  type: "CHANGE_ITEM_STATUS",
-  payload: { item, isCompleted },
-});
-
-export const changeView = () => ({
-  type: "CHANGE_VIEW",
+export const setUser = (name: string) => ({
+  type: "SET_USER",
+  payload: name,
 });
