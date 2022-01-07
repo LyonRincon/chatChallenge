@@ -1,20 +1,28 @@
 import * as React from "react";
-import { FlatList, StyleSheet, View, Text } from "react-native";
-import { useNavigation, useFocusEffect } from "@react-navigation/native";
+import { StyleSheet, View } from "react-native";
+import {
+  useNavigation,
+  useFocusEffect,
+  useRoute,
+} from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../redux/reducers";
-import { TextInput, Button, IconButton, Avatar } from "react-native-paper";
+import { TextInput, IconButton } from "react-native-paper";
 import SimpleHeader from "../components/SimpleHeader";
 import Chat from "../components/Chat";
 import { addMessage, resetChat } from "../redux/actions";
 import * as helpers from "../helpers/helpers";
 import uuid from "react-native-uuid";
+import { Bots, Colors } from "constants";
 
 export default function ChatScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
+  const route = useRoute();
   const [text, setText] = React.useState("");
   const { chat, name } = useSelector((state: RootState) => state.mainReducer);
+  const botId = route?.params?.botId;
+  const bot = Bots.find((b) => b.id === botId);
 
   useFocusEffect(
     React.useCallback(() => {
@@ -22,7 +30,7 @@ export default function ChatScreen() {
         dispatch(
           addMessage({
             id: uuid.v4().toString(),
-            text: helpers.getRandomQuestion(),
+            text: helpers.getRandomQuestion(botId),
             sender: "bot",
             time: helpers.getMsgTime(),
           })
@@ -46,7 +54,7 @@ export default function ChatScreen() {
         dispatch(
           addMessage({
             id: uuid.v4().toString(),
-            text: helpers.getRandomQuestion(),
+            text: helpers.getRandomQuestion(botId),
             sender: "bot",
             time: helpers.getMsgTime(),
           })
@@ -62,10 +70,10 @@ export default function ChatScreen() {
 
   return (
     <View style={styles.container}>
-      <SimpleHeader title={`${name} to WALL-E`} backToClick={endChat} />
+      <SimpleHeader title={`${name} to ${bot?.name}`} backToClick={endChat} />
       <View style={styles.subContainer}>
         <View style={styles.chatContainer}>
-          <Chat chat={chat} />
+          <Chat chat={chat} bot={bot} />
         </View>
         <View style={styles.msgContainer}>
           <TextInput
@@ -74,13 +82,13 @@ export default function ChatScreen() {
             onChangeText={(text: string) => setText(text)}
             style={styles.input}
             onSubmitEditing={submitMessage}
-            activeOutlineColor="#131B24"
-            activeUnderlineColor="#131B24"
+            activeOutlineColor={Colors.bgColor}
+            activeUnderlineColor={Colors.bgColor}
             blurOnSubmit={false}
           />
           <IconButton
             icon="send"
-            color={"#0399FF"}
+            color={Colors.bgAlternative}
             size={40}
             style={styles.button}
             onPress={submitMessage}
@@ -94,7 +102,7 @@ export default function ChatScreen() {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#131B24",
+    backgroundColor: Colors.bgColor,
     height: "100%",
   },
   subContainer: {
@@ -121,7 +129,7 @@ const styles = StyleSheet.create({
   input: {
     width: "75%",
     borderRadius: 10,
-    borderColor: "#131B24",
+    borderColor: Colors.bgColor,
     borderWidth: 0,
   },
   button: {

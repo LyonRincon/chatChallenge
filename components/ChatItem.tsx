@@ -2,16 +2,19 @@ import React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { Avatar } from "react-native-paper";
 import { iMessageItem } from "../interfaces";
+import { Colors } from "constants";
 
-export default function ChatItem({ id, text, sender, time }: iMessageItem) {
+export default function ChatItem({
+  id,
+  text,
+  sender,
+  time,
+  botImage,
+}: iMessageItem) {
   return (
     <View style={[styles.msgBox, sender !== "bot" ? styles.msgBoxUser : {}]}>
       {sender === "bot" && (
-        <Avatar.Image
-          size={45}
-          style={{ backgroundColor: "#131B24" }}
-          source={require("../assets/images/walle.png")}
-        />
+        <Avatar.Image size={45} style={styles.avatar} source={botImage} />
       )}
       <View style={sender === "bot" ? styles.msgBot : styles.msgUser}>
         <Text style={sender === "bot" ? styles.msgBotText : styles.msgUserText}>
@@ -37,10 +40,14 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     padding: 10,
     marginLeft: 10,
+    flexShrink: 1,
+  },
+  avatar: {
+    backgroundColor: Colors.bgColor,
   },
   msgBotText: { color: "black" },
   msgUser: {
-    backgroundColor: "#0399FF",
+    backgroundColor: Colors.bgAlternative,
     borderRadius: 15,
     padding: 10,
     marginLeft: 10,

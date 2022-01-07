@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet } from "react-native";
 import { Appbar } from "react-native-paper";
 import { iSimpleHeader } from "../interfaces";
+import { Colors } from "constants";
 
 export default function SimpleHeader({
   title,
@@ -11,7 +12,7 @@ export default function SimpleHeader({
 }: iSimpleHeader) {
   const styles = StyleSheet.create({
     header: {
-      backgroundColor: useBg ? "#B2B200" : "#131B24",
+      backgroundColor: useBg ? "#B2B200" : Colors.bgColor,
     },
   });
   return (

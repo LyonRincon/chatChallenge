@@ -1,5 +1,6 @@
 import React from "react";
 import { Text, StyleSheet } from "react-native";
+import { Colors } from "constants";
 
 interface iNoResultsStrip {
   legend: string;
@@ -16,7 +17,7 @@ export default function NoResultsStrip({
 const styles = StyleSheet.create({
   emptyText: {
     marginTop: 10,
-    backgroundColor: "#B2B8BE",
+    backgroundColor: Colors.bgThird,
     padding: 10,
     textAlign: "center",
   },

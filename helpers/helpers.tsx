@@ -1,7 +1,9 @@
-import { Questions } from "../constants/Questions";
+import { Questions } from "constants";
 
-const getRandomQuestion = () => {
-  return Questions[Math.floor(Math.random() * Questions.length)];
+const getRandomQuestion = (botId: number) => {
+  return Questions.find((q: any) => q.botId === botId)?.questions[
+    Math.floor(Math.random() * Questions.length)
+  ];
 };
 
 const getMsgTime = () => {

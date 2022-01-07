@@ -3,7 +3,7 @@ import { Text, StyleSheet, FlatList, View } from "react-native";
 import { iMessageList } from "../interfaces";
 import ChatItem from "./ChatItem";
 
-export default function Chat({ chat }: iMessageList) {
+export default function Chat({ chat, bot }: iMessageList) {
   return (
     <FlatList
       style={styles.scrollList}
@@ -15,6 +15,7 @@ export default function Chat({ chat }: iMessageList) {
           text={item.text}
           sender={item.sender}
           time={item.time}
+          botImage={bot.avatar}
         />
       )}
       ListEmptyComponent={

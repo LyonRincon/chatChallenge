@@ -1,5 +1,6 @@
 export interface iMessageList {
   chat: iMessageItem[];
+  bot: any;
 }
 
 export interface iMessageItem {
@@ -7,6 +8,7 @@ export interface iMessageItem {
   text: string;
   sender: string;
   time: string;
+  botImage: any;
 }
 
 export interface iSimpleHeader {
@@ -17,4 +19,13 @@ export interface iSimpleHeader {
     onPress: () => void;
   };
   useBg?: boolean;
+}
+
+export interface iBotSelector {
+  id: number;
+  name: string;
+  avatar: any;
+  subject: string;
+  selected?: boolean;
+  onPress: (id: number) => void;
 }
